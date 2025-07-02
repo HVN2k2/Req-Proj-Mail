@@ -24,6 +24,7 @@
     - Mô-đun thông báo (Notification module): Cho phép ứng dụng gửi thông báo tự động đến người dùng, chẳng hạn qua email.
 
 1.3. Ví dụ về kiến trúc monolithic là gì?
+
     Để hiểu rõ kiến trúc monolithic, hãy xem ví dụ về một ứng dụng ngân hàng. Cách hoạt động như sau:
     - Trang web của ứng dụng cho phép xác thực khách hàng.
     - Sau đó đăng nhập họ vào tài khoản.
@@ -43,11 +44,13 @@
     - Nhân hệ điều hành Linux
 
 1.4. Lợi ích của việc sử dụng kiến trúc Monolithic.
+
     Nhiều ứng dụng vẫn được tạo ra bằng mô hình phát triển nguyên khối vì nó mang lại một số lợi ích.
     Ví dụ, một số chương trình nguyên khối có thể có thời gian thông lượng và phản hồi tốt hơn so với các ứng dụng mô-đun, dựa trên microservice, đặc biệt nếu số lượng luồng và người dùng nhỏ. Chúng cũng có thể dễ dàng hơn để kiểm tra và gỡ lỗi vì chúng bao gồm ít yếu tố hơn và do đó liên quan đến ít biến và kịch bản thử nghiệm hơn.
     Kiến trúc nguyên khối đơn giản hóa sự phát triển trong giai đoạn đầu của vòng đời phát triển phần mềm (SDLC). Triển khai có thể được đơn giản hóa hơn nữa bằng cách sao chép ứng dụng đóng gói vào máy chủ. Một cơ sở mã duy nhất đơn giản hóa việc ghi nhật ký, quản lý cấu hình và giám sát hiệu suất ứng dụng. Cuối cùng, nhiều bản sao của ứng dụng có thể được đặt phía sau bộ cân bằng tải để cho phép tỷ lệ ngang.
 
 1.5. Hạn chế của kiến trúc Monolithic
+
     Mặc dù có lợi, kiến ​​trúc nguyên khối cũng đưa ra một số nhược điểm:
     Việc sử dụng một cơ sở mã duy nhất có nghĩa là cập nhật mã cho một thành phần của ứng dụng đòi hỏi phải cập nhật cho tất cả các thành phần liên quan. Quá trình này có thể tốn thời gian, có thể trì hoãn việc phát triển và triển khai ứng dụng, cũng như hạn chế sự nhanh nhẹn và tốc độ của các nhóm phát triển. Hạn chế này trở nên đặc biệt quan trọng đối với các sản phẩm phức tạp hoặc các nhóm lớn.
     Một số ứng dụng có một cơ sở mã lớn, có thể khó hiểu. Sự hiểu biết kém cản trở các nhà phát triển thực hiện sửa đổi mã cần thiết để đáp ứng các yêu cầu kinh doanh hoặc kỹ thuật thay đổi. Khi các yêu cầu phát triển hoặc trở nên phức tạp hơn, việc thực hiện chính xác các thay đổi hơn nữa mà không cản trở chất lượng mã và hiệu suất ứng dụng.
@@ -60,11 +63,13 @@
 # II. Kiến trúc Microservice.
 
 2.1. Microservice là gì ?
+
     Microservices là các module trong hệ thống được chia thành nhiều services nhỏ. Mỗi service sẽ thực hiện các chức năng chuyên biệt, như quản lý đơn hàng hoặc quản lý khách hàng,… và được đặt tại một server riêng, cho phép nâng cấp chỉnh sửa một cách độc lập. Các server này có thể giao tiếp thông qua các phương thức như gRPC, Rest API, lambda và không bị ảnh hưởng bởi nhau.
     Việc áp dụng kiến trúc microservices cho phép chia nhỏ chức năng của ứng dụng thành các dịch vụ nhỏ, tối ưu hóa trải nghiệm và tốc độ cho từng người dùng. Thiết kế giao diện dựa trên từng đối tượng giúp cải thiện tương thích và tốc độ, đồng thời giảm thiểu các chức năng không cần thiết.
     Bằng cách chia nhỏ chức năng thành các dịch vụ độc lập, nhà phát triển có thể tận dụng nhiều công nghệ và nền tảng đa dạng, từ đó xây dựng ứng dụng nhanh chóng hơn và đáp ứng các yêu cầu kinh doanh một cách linh hoạt hơn.
 
 2.2. Ưu điểm của Microservice.
+
     Bằng cách chia nhỏ hệ thống thành các dịch vụ nhỏ, Microservices giúp giảm độ phức tạp và dễ dàng quản lý. Trong cấu trúc microservices, các dịch vụ giao tiếp với nhau thông qua Remote Procedure Call (RPC) hoặc Message – driven API, tạo ra sự kết nối linh hoạt. Đặc biệt, việc chia nhỏ mỗi dịch vụ sẽ giúp quá trình phát triển trở nên nhanh hơn, tiết kiệm thời gian hơn, khả năng nắm bắt và bảo trì hệ thống hiệu quả hơn.
     Một lợi thế quan trọng khác của kiến trúc Microservices là khả năng phát triển độc lập từng dịch vụ bởi các nhóm riêng biệt. Điều này giúp các nhà phát triển tự do lựa chọn công nghệ phù hợp cho quá trình phát triển.
     Bên cạnh đó, việc đóng gói mỗi dịch vụ vào một docker container độc lập của Microservices giúp giảm thiểu thời gian triển khai và tăng tính linh hoạt của hệ thống. Đặc biệt, khi áp dụng continuous deployment vào microservices, các nhà phát triển có thể tự động hóa quy trình triển khai liên tục mà không gây gián đoạn hoặc tác động đến các dịch vụ khác.
@@ -72,6 +77,7 @@
     Mặc dù microservices ra đời để cải thiện các vấn đề của monolith thế nhưng cấu trúc này vẫn tồn tại nhiều nhược điểm bên cạnh các ưu điểm vượt trội của nó.
 
 2.3. Nhược điểm của Microservice.
+
     Trong kiến trúc Microservices, các nhà phát triển phải đối mặt với việc lựa chọn cách giao tiếp giữa các dịch vụ, có thể thông qua messaging hoặc RPC. Đồng thời, họ cũng phải xử lý các vấn đề khó khăn khi gặp phải kết nối chậm hoặc lỗi trong quá trình trao đổi các thông điệp (message). Vì vậy, microservices đòi hỏi sự phức tạp hơn với việc phát triển ứng dụng nguyên khối monolith.
     Nhược điểm tiếp theo của Microservices đến từ việc đảm bảo giao dịch phân tán. Việc cập nhật dữ liệu chính xác (all or none) vào nhiều dịch vụ nhỏ khác nhau là một nhiệm vụ khó hơn nhiều so với việc đảm bảo giao dịch được cập nhật trên nhiều bảng trong một cơ sở dữ liệu trung tâm. Theo nguyên tắc CAP, giao dịch phân tán không thể đáp ứng đồng thời cả ba điều kiện sau:
     - Consistency: Dữ liệu ở các điểm khác nhau trong mạng phải như nhau.
@@ -80,6 +86,7 @@
     Hiện tại, các công nghệ cơ sở dữ liệu phi quan hệ (NoSQL) hay message broker tốt nhất cũng chưa đạt được nguyên tắc CAP. Ngoài ra, doanh nghiệp sẽ gặp nhiều phức tạp hơn nếu triển khai thủ công microservices architecture như đã làm với monolith.
 
 2.4. Sử dụng kiến trúc Microservice khi nào?
+
     Sở hữu lợi thế có thể hoạt động độc lập, microservices luôn được các nhà phát triển áp dụng khi phát triển các hệ thống lớn, phức tạp và bảo trì thường xuyên.
     Phát triển ứng dụng App Native
         Các nhà phát triển có thể tập trung vào một số Microservices cụ thể mà không cần lo về những dịch vụ khác. Điều này giúp tăng tốc độ phát triển và nhanh chóng đưa sản phẩm ra thị trường.
@@ -89,6 +96,7 @@
         Microservices cho phép Developer vượt qua rào cản ngôn ngữ và công nghệ. Họ có thể sử dụng nhiều ngôn ngữ lập trình và công nghệ khác nhau trong cùng một sản phẩm, đồng thời tích hợp với các module IoT một cách linh hoạt.
 
 2.5. Chi phí phát triển.
+
     Microservice cần rất nhiều chi phí vận hành.
     Thông thường một ứng dụng trải qua rất nhiều các phase trước khi được publish hoàn toàn. Mỗi service phải trải qua build, test, deploy and run. Mỗi dịch vụ có thể được viết bằng các ngôn ngữ và chạy trên các môi trường/ hệ điều hành khác nhau, các kịch bản triển khai CI/CD, và các dependency cũng có thể khác nhau.
     Mỗi ứng dụng lại cần được triển khai theo cụm (clustering) để đáp ứng khả năng chịu lỗi và phục hồi, dẫn đến x2, x3 số lượng runtime instance so với số lượng dịch vụ ban đầu. Nếu hệ thống có 15 service, số lượng runtime instance có thể lên tới 30-50. Cộng thêm với các thành phần Load balancer và Message broker, hệ thống đã trở nên khá lớn nếu so với ứng dụng monolithic cùng chức năng.
@@ -119,9 +127,11 @@
 # III.Kiến trúc Modular Monolithic.
 
 3.1. Kiến trúc Modular Monolithic là gì?
+
     Modular Monolithic Architecture là một kiểu kiến trúc phần mềm trong đó toàn bộ ứng dụng được phát triển và triển khai như một khối đơn (monolith), nhưng được tổ chức nội bộ theo từng module chức năng tách biệt. Mỗi module đại diện cho một domain độc lập như người dùng, sản phẩm, thanh toán,... và có thể có controller, service, repository riêng.
 
 3.2. Các tính năng và thành phần chính.
+
     Các tính năng nổi bật:
     - Tố chức theo module : Mỗi chức năng được tách thành một module riêng biệt
     - Phân tách logic rõ ràng : Mỗi module có thể có controller, service, repository và domain model riêng.
@@ -134,4 +144,5 @@
     - Entry point : Lớp khởi động hệ thống, thường là Application.java trong Spring Boot.
 
 3.3. Ưu điểm và hạn chế của kiến trúc Modular.
+
     Kiến trúc Modular Monolithic mang lại nhiều lợi ích đáng kể trong quá trình phát triển phần mềm. Việc tổ chức hệ thống thành các module riêng biệt giúp mã nguồn trở nên rõ ràng, dễ đọc và dễ bảo trì, đặc biệt khi làm việc trong các nhóm phát triển lớn. Kiến trúc này cũng hạn chế được các phụ thuộc vòng giữa các thành phần, đồng thời giữ nguyên sự đơn giản trong triển khai và vận hành như một hệ thống monolithic thông thường. Ngoài ra, Modular Monolithic còn phù hợp với các quy trình DevOps hiện đại và tạo nền tảng thuận lợi để chuyển đổi dần sang microservices trong tương lai khi cần thiết. Tuy nhiên, kiến trúc này cũng tồn tại một số hạn chế, như không thể mở rộng độc lập từng module khi cần, dẫn đến việc toàn bộ hệ thống phải chịu tải chung. Việc sử dụng cùng một nền tảng công nghệ cho tất cả module cũng làm giảm tính linh hoạt, và nếu một module gặp lỗi nghiêm trọng thì có thể ảnh hưởng đến toàn bộ hệ thống. Do đó, mặc dù Modular Monolithic là giải pháp cân bằng giữa tính đơn giản và khả năng tổ chức tốt, nó vẫn không phù hợp với các hệ thống có quy mô cực lớn hoặc yêu cầu phân tán cao.
