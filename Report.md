@@ -4,9 +4,13 @@
 
 1.1. Kiến trúc đơn khối là gì ?
 
-    Kiến trúc nguyên khối là mô hình thống nhất truyền thống để thiết kế một chương trình phần mềm . Nguyên khối , trong ngữ cảnh này, có nghĩa là "được tạo thành một khối". Theo từ điển Cambridge, tính từ nguyên khối cũng có nghĩa là "quá lớn" và "không thể thay đổi".
-    Trong phát triển phần mềm, mô hình kiến ​​trúc đơn khối là mô hình mà một cơ sở mã duy nhất được sử dụng để thực hiện nhiều chức năng trong một ứng dụng . Ngoài ra, mỗi thành phần và các thành phần liên quan trong ứng dụng đều phải có mặt để mã được thực thi hoặc biên dịch và để phần mềm chạy.
-    Hơn nữa, các chức năng khác nhau được liên kết chặt chẽ chứ không phải liên kết lỏng lẻo , như trong các chương trình phần mềm mô-đun , và một số chức năng như vậy là một phần của một ứng dụng duy nhất. Vì tất cả những lý do này, phần mềm độc khối thường rất phức tạp.
+    Kiến trúc nguyên khối là mô hình thống nhất truyền thống để thiết kế một chương trình phần mềm . Nguyên khối , trong ngữ cảnh này, có nghĩa 
+    là "được tạo thành một khối". Theo từ điển Cambridge, tính từ nguyên khối cũng có nghĩa là "quá lớn" và "không thể thay đổi".
+    Trong phát triển phần mềm, mô hình kiến ​​trúc đơn khối là mô hình mà một cơ sở mã duy nhất được sử dụng để thực 
+    hiện nhiều chức năng trong một ứng dụng . Ngoài ra, mỗi thành phần và các thành phần liên quan trong ứng dụng đều phải 
+    có mặt để mã được thực thi hoặc biên dịch và để phần mềm chạy.
+    Hơn nữa, các chức năng khác nhau được liên kết chặt chẽ chứ không phải liên kết lỏng lẻo , như trong các chương trình phần mềm mô-đun ,
+    và một số chức năng như vậy là một phần của một ứng dụng duy nhất. Vì tất cả những lý do này, phần mềm độc khối thường rất phức tạp.
 
 1.2. Các tính năng và thành phần chính của ứng dụng đơn khối.
 
@@ -181,7 +185,9 @@
     service là điều không thể tránh khỏi, nhưng cũng cần được tối ưu để giảm chi phí và rủi ro cho việc maintain hệ thống.
 
     Xử lý hệ thống phân tán phức tạp
-    Microservices triển khai trên một hệ thống phân tán, các service thậm chí còn không cùng nằm trên một server, đây cũng chính là nguyên do dẫn đến rất nhiều vấn đề của microservices mà nếu ở hệ thống monolithic thậm chí chúng ta còn chưa nghe tới. Các vấn đề có thể kể đến như khả năng chịu lỗi, độ trễ của mạng, xử lý bất đồng bộ, transaction cross qua nhiều service, version của ứng dụng, tracing dữ liệu, khả năng tương thích ngược, cấu hình tập trung…
+    Microservices triển khai trên một hệ thống phân tán, các service thậm chí còn không cùng nằm trên một server, đây cũng chính là nguyên do 
+    dẫn đến rất nhiều vấn đề của microservices mà nếu ở hệ thống monolithic thậm chí chúng ta còn chưa nghe tới. Các vấn đề có thể kể đến như khả năng chịu lỗi, 
+    độ trễ của mạng, xử lý bất đồng bộ, transaction cross qua nhiều service, version của ứng dụng, tracing dữ liệu, khả năng tương thích ngược, cấu hình tập trung…
     - Khả năng chịu lỗi: Microservices cần có khả năng chịu lỗi khi có một thành phần trong hệ thống không hoạt động và đảm bảo business 
     không bị ảnh hưởng khi có một dịch vụ bị downtime hoặc xảy ra lỗi trong giao tiếp.
     - Độ trễ của network: Với càng nhiều microservices, nguy cơ độ trễ của function càng lớn, vấn đề này rất quan trọng với các ứng dụng 
@@ -189,13 +195,17 @@
     - Xử lý bất đồng bộ: Trong hệ thống có thể có những function không thể nào nhận được đáp ứng ngay lập tức, vậy hệ thống lại cần có cơ 
     chế để bên request có thể nhận biết được kết quả của một request đã được đáp ứng thực sự.
     - Transaction cross qua nhiều dịch vụ: Đây là vấn đề thực sự quan trọng, Data consistency luôn là vấn đề quan trọng trong bất cứ hệ 
-    thống nào. Có lỗi trên một ứng dụng monolithic sẽ dễ dàng được giải quyết hơn do các framework hầu hết đã hỗ trợ Transactional trên các function khi thực thi. Nhưng điều này không thể lặp lại trên microservices, do các ứng dụng có nhu cầu gọi đến nhau để thực thi một business function, chưa kể đến các kênh giao tiếp khác Send and forget (messaging), dẫn đến các chức năng hoặc dữ liệu không thể rollback theo cách truyền thống.
+    thống nào. Có lỗi trên một ứng dụng monolithic sẽ dễ dàng được giải quyết hơn do các framework hầu hết đã hỗ trợ Transactional trên các 
+    function khi thực thi. 
+    Nhưng điều này không thể lặp lại trên microservices, do các ứng dụng có nhu cầu gọi đến nhau để thực thi một business function, chưa kể đến 
+    các kênh giao tiếp khác Send and forget (messaging), dẫn đến các chức năng hoặc dữ liệu không thể rollback theo cách truyền thống.
     - Version của ứng dụng: Việc kết hợp giữa các team yêu cầu sự thống nhất về mặt interface giao tiếp và chức năng. Làm thế nào để 
     biết một business function trong release mới đang cần code của những dịch vụ nào, version nào của dịch vụ đó, và nhu cầu rollback cả hệ thống.
     - Tracing dữ liệu: Việc debug trên hệ thống microservices không đầy đủ là khá khó khăn, nếu một function cross qua nhiều service 
     và mỗi service chạy trên một vài instance. Điều này lại yêu cầu một hệ thống loging tập trung.
     - Khả năng tương thích ngược: Các ứng dụng khi phát triển cần được quản lý các version và thay đổi interface một cách cần trọng, 
-    cân nhắc đến khả năng tương thích ngược với các hệ thống hiện tại. Thận trọng trong các thay đổi về request/response hoặc các bussiness code. Bạn có thể phát triển thêm một tính năng những sẽ break business hiện tại.
+    cân nhắc đến khả năng tương thích ngược với các hệ thống hiện tại. Thận trọng trong các thay đổi về request/response hoặc các bussiness code. 
+    Bạn có thể phát triển thêm một tính năng những sẽ break business hiện tại.
     - Centralize configuration: Khi hệ thống phân tán mà không có giải pháp cho việc centralize các configuration, nhà phát triển sẽ 
     phải thường xuyên thay đổi các config một các thủ công và trên nhiều dịch vụ. Việc này khá mất effort và không đảm bảo tính chính xác/ ổn 
     định của hệ thống.
