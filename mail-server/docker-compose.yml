@@ -1,0 +1,30 @@
+version: '3.8'
+services:
+  postfix:
+    build: ./postfix
+    container_name: postfix
+    hostname: mail.hvn.com
+    ports:
+      - "25:25"
+      - "587:587"
+    volumes:
+      - ./data/mail/testuser:/home/testuser
+    networks:
+      - mailnet
+
+  dovecot:
+    build: ./dovecot
+    container_name: dovecot
+    hostname: imap.hvn.com
+    ports:
+      - "993:993"
+    volumes:
+      - ./data/mail/testuser:/home/testuser
+    depends_on:
+      - postfix
+    networks:
+      - mailnet
+
+networks:
+  mailnet:
+    driver: bridge

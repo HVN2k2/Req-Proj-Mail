@@ -1,0 +1,11 @@
+myhostname = mail.hvn.com
+mydomain = hvn.com
+myorigin = $mydomain
+inet_interfaces = all
+inet_protocols = ipv4
+mydestination = $myhostname, localhost.$mydomain, localhost, $mydomain
+
+# Lưu mail vào Maildir của /home/<username>
+home_mailbox = Maildir/
+
+smtpd_banner = $myhostname ESMTP
