@@ -1,7 +1,15 @@
 FROM debian:bullseye
 
-RUN apt update && apt install -y postfix && apt clean
+ENV DEBIAN_FRONTEND=noninteractive
 
-COPY main.cf /etc/postfix/main.cf
+# Cài postfix và rsyslog
+RUN apt-get update && \
+    apt-get install -y postfix rsyslog && \
+    mkdir -p /var/spool/postfix && \
+    chown postfix:postfix /var/spool/postfix
 
-CMD ["postfix", "start-fg"]
+# Copy file cấu hình postfix
+COPY ./main.cf /etc/postfix/main.cf
+
+# Script khởi động: chạy rsyslog + postfix foreground
+CMD rsyslogd && postfix start-fg

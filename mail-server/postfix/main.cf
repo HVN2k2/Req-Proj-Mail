@@ -1,11 +1,23 @@
+# Domain & Host
 myhostname = mail.hvn.com
 mydomain = hvn.com
 myorigin = $mydomain
-inet_interfaces = all
-inet_protocols = ipv4
+
 mydestination = $myhostname, localhost.$mydomain, localhost, $mydomain
 
-# Lưu mail vào Maildir của /home/<username>
+
+# Giao diện và giao thức mạng
+inet_interfaces = all
+inet_protocols = ipv4
+
+# Cho phép BE relay
+mynetworks = 127.0.0.0/8, 172.19.0.0/16
+
+# Hộp thư lưu tại home/<user>/Maildir
 home_mailbox = Maildir/
 
+# Cho phép gửi từ BE
+smtpd_recipient_restrictions = permit_mynetworks, permit_sasl_authenticated, reject_unauth_destination
+
+# Banner EHLO
 smtpd_banner = $myhostname ESMTP
