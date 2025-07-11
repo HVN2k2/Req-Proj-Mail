@@ -2,14 +2,17 @@ FROM debian:bullseye
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Cài postfix và rsyslog
+# Cài postfix, rsyslog và mailutils
 RUN apt-get update && \
-    apt-get install -y postfix rsyslog && \
+    apt-get install -y postfix rsyslog mailutils && \
     mkdir -p /var/spool/postfix && \
     chown postfix:postfix /var/spool/postfix
 
-# Copy file cấu hình postfix
+# Copy cấu hình postfix
 COPY ./main.cf /etc/postfix/main.cf
 
-# Script khởi động: chạy rsyslog + postfix foreground
-CMD rsyslogd && postfix start-fg
+# Tạo file log nếu chưa có
+RUN touch /var/log/mail.log && chmod 644 /var/log/mail.log
+
+# Start script: rsyslog + postfix foreground
+CMD sh -c "rsyslogd && postfix start && tail -f /var/log/mail.log"
