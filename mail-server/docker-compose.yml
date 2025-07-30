@@ -8,7 +8,10 @@ services:
       - "25:25"
       - "587:587"
     volumes:
-      - ./data/mail/testuser:/home/testuser
+      # - ./data/mail/testuser:/home/testuser
+      - ./data:/data
+      - ./postfix/vmailbox:/etc/postfix/vmailbox:ro
+      - ./postfix/main.cf:/etc/postfix/main.cf
     networks:
       - mailnet
 
@@ -19,7 +22,7 @@ services:
     ports:
       - "993:993"
     volumes:
-      - ./data/mail/testuser:/home/testuser
+      - ./data/mail/testuser:/home
     depends_on:
       - postfix
     networks:

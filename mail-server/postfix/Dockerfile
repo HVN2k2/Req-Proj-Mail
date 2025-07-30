@@ -10,9 +10,11 @@ RUN apt-get update && \
 
 # Copy cấu hình postfix
 COPY ./main.cf /etc/postfix/main.cf
-
+COPY vmailbox /etc/postfix/vmailbox
 # Tạo file log nếu chưa có
 RUN touch /var/log/mail.log && chmod 644 /var/log/mail.log
 
 # Start script: rsyslog + postfix foreground
 CMD sh -c "rsyslogd && postfix start && tail -f /var/log/mail.log"
+RUN postmap /etc/postfix/vmailbox
+

@@ -1,23 +1,31 @@
-# Domain & Host
+# ==== Domain & Host ====
 myhostname = mail.hvn.com
 mydomain = hvn.com
 myorigin = $mydomain
 
-mydestination = $myhostname, localhost.$mydomain, localhost, $mydomain
+# Đích nhận thư (local hoặc virtual domain)
+mydestination = $myhostname, localhost.$mydomain, localhost
 
-
-# Giao diện và giao thức mạng
+# ==== Giao diện và giao thức mạng ====
 inet_interfaces = all
 inet_protocols = ipv4
 
-# Cho phép BE relay
+# ==== Relay từ backend được phép ====
 mynetworks = 127.0.0.0/8, 172.19.0.0/16
 
-# Hộp thư lưu tại home/<user>/Maildir
-home_mailbox = Maildir/
+# ==== Virtual Mailbox ====
+virtual_mailbox_domains = hvn.com
+virtual_mailbox_base = /data/mail
+virtual_mailbox_maps = hash:/etc/postfix/vmailbox
+virtual_uid_maps = static:5000
+virtual_gid_maps = static:5000
+virtual_minimum_uid = 100
 
-# Cho phép gửi từ BE
+# ==== Không dùng home_mailbox nữa ====
+#home_mailbox = Maildir/     <-- Bỏ dòng này đi
+
+# ==== SMTP Restrictions ====
 smtpd_recipient_restrictions = permit_mynetworks, permit_sasl_authenticated, reject_unauth_destination
 
-# Banner EHLO
+# ==== EHLO banner ====
 smtpd_banner = $myhostname ESMTP
