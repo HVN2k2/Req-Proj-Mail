@@ -2,59 +2,93 @@
   <div class="container-fluid">
     <div class="row">
       <!-- Sidebar -->
-      <div class="col-md-2 bg-white border-end vh-100 p-0">
+      <div class="col-md-2 bg-white border-end vh-100 p-0 position-relative">
         <div class="d-flex flex-column h-100">
           <div class="p-3 border-bottom">
-            <button class="btn btn-danger w-100">📨 Compose</button>
+            <router-link to="/mail/compose">
+              <button class="btn btn-danger w-100">📨 Compose</button>
+            </router-link>
           </div>
-          <ul class="nav flex-column p-3">
-            <li class="nav-item"><a class="nav-link active" href="#">📥 Inbox</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">📤 Sent</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">📝 Drafts</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">🗑 Trash</a></li>
+          <ul class="nav flex-column p-3 flex-grow-1">
+            <li class="nav-item">
+              <router-link class="nav-link" to="/mail/inbox" active-class="active">📥 Inbox</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link class="nav-link" to="/mail/sent" active-class="active">📤 Sent</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link class="nav-link" to="/mail/drafts" active-class="active">📝 Drafts</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link class="nav-link" to="/mail/trash" active-class="active">🗑 Trash</router-link>
+            </li>
           </ul>
+          
+          <!-- Spacer để tránh content bị che bởi UserProfile -->
+          <div class="user-profile-spacer"></div>
+        </div>
+        
+        <!-- User Profile Section - Fixed at bottom -->
+        <div class="user-profile-container">
+          <UserProfile />
         </div>
       </div>
 
       <!-- Main content -->
       <div class="col-md-10 px-4 pt-3">
-        <!-- Header -->
-        <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3">
-          <h1 class="h4">Inbox</h1>
-          <input type="text" class="form-control w-25" placeholder="Search mail...">
-        </div>
-
-        <!-- Mail list -->
-        <div class="list-group shadow-sm">
-          <a href="#" class="list-group-item list-group-item-action">
-            <div class="d-flex justify-content-between">
-              <h5 class="mb-1">Google</h5>
-              <small>10:30 AM</small>
-            </div>
-            <p class="mb-1">Welcome to your Gmail clone project. Let's get started.</p>
-            <small class="text-muted">noreply@gmail.com</small>
-          </a>
-          <a href="#" class="list-group-item list-group-item-action">
-            <div class="d-flex justify-content-between">
-              <h5 class="mb-1">YouTube</h5>
-              <small>9:15 AM</small>
-            </div>
-            <p class="mb-1">Your video has been approved. Check it now!</p>
-            <small class="text-muted">youtube-noreply@gmail.com</small>
-          </a>
-        </div>
+        <!-- 🟡 THÊM router-view ở đây -->
+        <router-view />
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-// nothing for now, can add props or pinia store later
+import UserProfile from './UserProfile.vue'
 </script>
 
 <style scoped>
 .nav-link.active {
   font-weight: bold;
   color: #d93025 !important;
+}
+
+.user-profile-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 16.666667%; /* col-md-2 width */
+  background: white;
+  border-top: 1px solid #dee2e6;
+  z-index: 1000;
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+}
+
+.user-profile-spacer {
+  height: 120px; /* Chiều cao của UserProfile + padding */
+}
+
+/* Đảm bảo sidebar có scroll nếu cần */
+.col-md-2 {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* Ẩn scrollbar nhưng vẫn scroll được */
+.col-md-2::-webkit-scrollbar {
+  width: 6px;
+}
+
+.col-md-2::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.col-md-2::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+.col-md-2::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
 }
 </style>
