@@ -20,9 +20,10 @@ services:
     container_name: dovecot
     hostname: imap.hvn.com
     ports:
+      - "143:143"
       - "993:993"
     volumes:
-      - ./data/mail/testuser:/home
+      - ./data:/data
     depends_on:
       - postfix
     networks:

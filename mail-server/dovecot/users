@@ -1,2 +1,5 @@
+# Format: username:{SCHEME}password
+# Sử dụng PLAIN password để đơn giản cho dự án cá nhân
 testuser:{PLAIN}123456
 nhuan2002:{PLAIN}Nhuan2002@
+honhuan2002:{PLAIN}Nhuan2002@

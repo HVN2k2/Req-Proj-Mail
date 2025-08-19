@@ -1,0 +1,12 @@
+package com.hvn_proj_mail.mail.project.repository;
+
+import com.hvn_proj_mail.mail.project.entity.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.Optional;
+
+public interface UserRepository extends JpaRepository<User, Long> {
+    Optional<User> findByEmail(String email);
+    boolean existsByEmail(String email);
+    Optional<User> findByLaoidId(String laoidId);
+}

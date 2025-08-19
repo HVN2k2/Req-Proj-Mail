@@ -2,8 +2,19 @@
   <div>
     <div class="d-flex justify-content-between align-items-center mb-3">
       <h2>📥 Inbox</h2>
-      <div v-if="loading" class="spinner-border spinner-border-sm" role="status">
-        <span class="visually-hidden">Loading...</span>
+      <div class="d-flex align-items-center">
+        <button 
+          @click="fetchMailsFromServer" 
+          :disabled="loading"
+          class="btn btn-outline-primary btn-sm me-2"
+          title="Fetch new mails"
+        >
+          <span v-if="loading" class="spinner-border spinner-border-sm me-1"></span>
+          {{ loading ? '🔄' : '📥' }} Refresh
+        </button>
+        <div v-if="loading" class="spinner-border spinner-border-sm" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
       </div>
     </div>
     
@@ -85,7 +96,11 @@
 
 <script setup>
 import { ref, computed, onMounted } from 'vue'
-import { mailAPI } from '@/api.js'
+import { useRouter } from 'vue-router'
+import { mailAPI } from '../api.js'
+import mailService from '../services/mailService.js'
+
+const router = useRouter()
 
 const mails = ref([])
 const loading = ref(false)
@@ -188,6 +203,7 @@ function selectMail(mail) {
   selectedMail.value = mail
   // Emit event để parent component có thể xử lý
   // this.$emit('mail-selected', mail)
+  router.push({ name: 'MailDetail', params: { id: mail.id } })
 }
 
 function formatDate(dateString) {
@@ -209,9 +225,28 @@ function formatDate(dateString) {
   }
 }
 
+// Function để fetch mail từ server
+async function fetchMailsFromServer() {
+  try {
+    console.log('🔄 Fetching mails from server in Inbox component...')
+    const result = await mailService.fetchMails()
+    
+    if (result.success) {
+      console.log('✅ Mails fetched successfully, reloading inbox...')
+      // Reload mails sau khi fetch thành công
+      await loadMails()
+    } else {
+      console.log('⚠️ Mail fetch result:', result.message)
+    }
+  } catch (error) {
+    console.error('❌ Error fetching mails in Inbox:', error)
+  }
+}
+
 // Lifecycle
-onMounted(() => {
-  loadMails()
+onMounted(async () => {
+  // Fetch mail trước khi load inbox
+  await fetchMailsFromServer()
 })
 </script>
 

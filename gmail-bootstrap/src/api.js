@@ -70,6 +70,9 @@ export const mailAPI = {
   getInbox: (toEmail, page = 0, size = 10) => 
     api.get(`/mail/getAllMail?toEmail=${toEmail}&page=${page}&size=${size}`),
   
+  // Lấy chi tiết mail theo ID
+  getMailDetail: (mailId) => api.get(`/mail/detail/${mailId}`),
+  
   // Lấy mail đã gửi
   getSentMails: () => api.get('/mail/sent'),
   

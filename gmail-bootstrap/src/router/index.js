@@ -12,6 +12,7 @@
   import ComposeView from '../views/ComposeView.vue'
   import DraftsView from '../views/DraftsView.vue'
   import TrashView from '../views/TrashView.vue'
+  import MailDetail from '../components/MailDetail.vue'
 
   const routes = [
     {
@@ -48,6 +49,7 @@
         { path: 'compose', name: 'Compose', component: ComposeView },
         { path: 'drafts', name: 'Drafts', component: DraftsView },
         { path: 'trash', name: 'Trash', component: TrashView },
+        { path: 'detail/:id', name: 'MailDetail', component: MailDetail },
       ]
     }
   ]

@@ -1,0 +1,9 @@
+passdb {
+  driver = passwd-file
+  args = scheme=PLAIN username_format=%n /etc/dovecot/passwd
+}
+
+userdb {
+  driver = static
+  args = uid=5000 gid=5000 home=/data/mail/%n
+}
